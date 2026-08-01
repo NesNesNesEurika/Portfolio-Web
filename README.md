@@ -1,4 +1,4 @@
-# Eurika — Product & Visual Design Portfolio
+# Agnes Erika — Product & Visual Design Portfolio
 
 A responsive personal portfolio presenting product design, UI/UX studies, brand systems, campaign design, and social content experiments.
 
