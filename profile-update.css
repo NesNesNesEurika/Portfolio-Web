@@ -1,15 +1,16 @@
-/* Hero layout based directly on Agnes's revised editorial composition. */
+/* Agnes Erika portfolio refinements */
 .wordmark-mark {
   width: 2.35rem;
   font-size: .62rem;
 }
 
+/* HERO — two real columns so the headline cannot enter the portrait area. */
 .hero-profile {
   min-height: calc(100vh - 4.6rem);
   display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1.22fr) minmax(26rem, .78fr);
   grid-template-rows: auto auto auto auto;
-  column-gap: clamp(2.5rem, 6vw, 7rem);
+  column-gap: clamp(3.5rem, 5vw, 6rem);
   row-gap: 0;
   align-items: start;
   padding-top: clamp(3.5rem, 6vw, 6rem);
@@ -18,59 +19,59 @@
 
 .hero-profile::before,
 .hero-profile .hero-stamp,
-.hero-profile .hero-index {
+.hero-profile .hero-index,
+.hero-profile .display-title {
   display: none;
 }
 
-/* Place the existing hero children directly on the editorial grid. */
 .hero-profile .hero-copy,
 .hero-profile .hero-side {
   display: contents;
 }
 
 .hero-profile .eyebrow {
-  grid-column: 1 / 7;
+  grid-column: 1;
   grid-row: 1;
+  min-width: 0;
   margin: 0 0 1.35rem;
   color: var(--muted-foreground);
 }
 
-/* Agnes Erika belongs on the yellow photo name tag, not as a giant headline. */
-.hero-profile .display-title {
-  display: none;
-}
-
 .hero-role {
-  grid-column: 1 / 7;
+  grid-column: 1;
   grid-row: 2;
   position: relative;
+  min-width: 0;
+  width: 100%;
+  max-width: 9.6ch;
   margin: 0;
-  max-width: 9.5ch;
   color: var(--foreground);
-  font-size: clamp(4.7rem, 7.5vw, 8.7rem);
-  line-height: .83;
+  font-size: clamp(4rem, 5.55vw, 7rem);
+  line-height: .84;
   font-weight: 900;
   letter-spacing: -.075em;
   text-transform: uppercase;
+  overflow-wrap: normal;
+  word-break: normal;
 }
 
 .hero-role::after {
   content: "";
   display: block;
   width: min(100%, 7.35ch);
-  height: clamp(.38rem, .65vw, .68rem);
-  margin-top: .16em;
+  height: clamp(.34rem, .55vw, .62rem);
+  margin-top: .18em;
   background: var(--primary);
 }
 
-/* The former teal card becomes plain supporting copy. */
 .hero-profile .hero-card {
-  grid-column: 1 / 7;
+  grid-column: 1;
   grid-row: 3;
   display: grid;
   grid-template-columns: auto minmax(0, 1fr);
   align-items: center;
   column-gap: .8rem;
+  min-width: 0;
   margin: clamp(1.8rem, 3vw, 3rem) 0 0;
   padding: 0;
   border: 0;
@@ -80,17 +81,18 @@
   transform: none;
 }
 
-.hero-profile .hero-card .micro-label {
+.hero-profile .hero-card .micro-label,
+.hero-profile .hero-card-meta {
   display: none;
 }
 
 .hero-profile .hero-intro {
   grid-column: 1 / -1;
   grid-row: 1;
+  max-width: 39rem;
   margin: 0 0 1.15rem;
-  max-width: 43rem;
   color: var(--foreground);
-  font-size: clamp(1.05rem, 1.4vw, 1.28rem);
+  font-size: clamp(1.02rem, 1.25vw, 1.22rem);
   line-height: 1.52;
 }
 
@@ -106,34 +108,32 @@
 .hero-profile .hero-card-title {
   grid-column: 2;
   grid-row: 2;
+  min-width: 0;
   margin: 0;
   padding: .8rem 0;
   border-block: 1px solid var(--foreground);
   color: var(--foreground);
   font-family: "Courier New", Courier, monospace;
-  font-size: clamp(.72rem, .9vw, .84rem);
+  font-size: clamp(.7rem, .8vw, .82rem);
   line-height: 1.5;
   font-weight: 700;
   letter-spacing: .035em;
   text-transform: uppercase;
 }
 
-.hero-profile .hero-card-meta {
-  display: none;
-}
-
 .hero-profile .hero-actions {
-  grid-column: 1 / 7;
+  grid-column: 1;
   grid-row: 4;
+  min-width: 0;
   margin-top: clamp(1.6rem, 2.5vw, 2.4rem);
 }
 
-/* Portrait: never crop the face, never cover it with a card. */
 .hero-photo {
-  grid-column: 8 / -1;
+  grid-column: 2;
   grid-row: 1 / 5;
   position: relative;
   align-self: stretch;
+  min-width: 0;
   min-height: clamp(35rem, 44vw, 46rem);
   overflow: visible;
   border: 0;
@@ -161,7 +161,7 @@
   padding: 0;
   object-fit: contain;
   object-position: center bottom;
-  background: #ffffff;
+  background: #fff;
   border: var(--line);
   box-shadow: var(--shadow);
 }
@@ -352,23 +352,16 @@
 
 @media (max-width: 1180px) {
   .hero-profile {
-    column-gap: 3rem;
-  }
-
-  .hero-profile .eyebrow,
-  .hero-role,
-  .hero-profile .hero-card,
-  .hero-profile .hero-actions {
-    grid-column: 1 / 7;
-  }
-
-  .hero-photo {
-    grid-column: 7 / -1;
-    min-height: 36rem;
+    grid-template-columns: minmax(0, 1.12fr) minmax(23rem, .88fr);
+    column-gap: 2.5rem;
   }
 
   .hero-role {
-    font-size: clamp(4.2rem, 7.5vw, 7.2rem);
+    font-size: clamp(3.7rem, 5.7vw, 5.6rem);
+  }
+
+  .hero-photo {
+    min-height: 36rem;
   }
 }
 
@@ -394,7 +387,7 @@
 @media (max-width: 900px) {
   .hero-profile {
     min-height: auto;
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     grid-template-rows: auto;
     padding-top: 3.5rem;
   }
@@ -411,6 +404,7 @@
   .hero-role { grid-row: 2; }
   .hero-profile .hero-card { grid-row: 3; }
   .hero-profile .hero-actions { grid-row: 4; }
+
   .hero-photo {
     grid-row: 5;
     width: min(100%, 38rem);
@@ -420,7 +414,7 @@
 
   .hero-role {
     max-width: 9.5ch;
-    font-size: clamp(4.25rem, 12vw, 7.2rem);
+    font-size: clamp(4.1rem, 12vw, 7rem);
   }
 
   .hero-profile .hero-intro {
@@ -435,7 +429,7 @@
 
   .hero-role {
     max-width: 9ch;
-    font-size: clamp(3.65rem, 16vw, 6.2rem);
+    font-size: clamp(3.5rem, 16vw, 6rem);
   }
 
   .hero-profile .hero-card {
@@ -465,7 +459,7 @@
 
 @media (max-width: 460px) {
   .hero-role {
-    font-size: clamp(3.1rem, 16vw, 4.6rem);
+    font-size: clamp(3rem, 16vw, 4.4rem);
   }
 
   .hero-profile .hero-card-title {
