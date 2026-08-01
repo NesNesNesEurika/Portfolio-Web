@@ -1,0 +1,12 @@
+
+https://nesnesneseurika.github.io/guestaeat-cafe/ (70% FUnctional, randomizernya bener bener gak random, dan tools for moodnya masih gak berfungsi contoh milih mood sad, yang budget small, dikasihnya chilly crab)
+website ini digunakan untuk APEX Hackaton (nomor 20, karena yang ikut lomba ada 20 orang (jujur aku gak tau nomor berapa, jadi aku ngarang aja, yang ngadain lomba juga gak peduli, santai-santai aja) (chat gpt, tolong ubah jadi yang lebih positive.))
+webiste ini untuk mereka yang kesulitan memilih makanan, jadi AI yang menentukan mereka mau makan apa sesuai cuaca, mood, dan budget.
+
+
+tolong nanti semuanya translate ke Inggris ya GPT
+dan tolong bullshit until kayak genuine produk walaupun produk ini udah banyak di Internet 
+bullshit nya harus professional dan kayak  menjual produk biar di porto terlihat menarik. 
+
+
+
