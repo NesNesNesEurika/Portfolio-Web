@@ -502,3 +502,39 @@
     min-width: 2.5rem;
   }
 }
+
+/* Final desktop safety zone: the headline must remain visibly separated from the portrait. */
+@media (min-width: 901px) {
+  .hero-profile {
+    grid-template-columns: minmax(0, 1fr) minmax(30rem, .72fr);
+    column-gap: clamp(5rem, 7vw, 8rem);
+  }
+
+  .hero-profile .eyebrow,
+  .hero-role,
+  .hero-profile .hero-card,
+  .hero-profile .hero-actions {
+    padding-right: clamp(1.5rem, 2.75vw, 3rem);
+  }
+
+  .hero-role {
+    max-width: none;
+    font-size: clamp(3.75rem, 4.65vw, 5.75rem);
+    letter-spacing: -.07em;
+  }
+
+  .hero-role::after {
+    width: min(100%, 7.1ch);
+  }
+}
+
+@media (min-width: 901px) and (max-width: 1250px) {
+  .hero-profile {
+    grid-template-columns: minmax(0, 1fr) minmax(25rem, .82fr);
+    column-gap: 3.5rem;
+  }
+
+  .hero-role {
+    font-size: clamp(3.45rem, 5vw, 4.75rem);
+  }
+}
