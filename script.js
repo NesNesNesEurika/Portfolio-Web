@@ -202,6 +202,14 @@
     trigger.addEventListener("click", () => {
       window.requestAnimationFrame(applyPalomaDialogUpdate);
     });
+
+    const dialog = document.querySelector("[data-case-dialog]");
+    if (dialog && !dialog.dataset.palomaCleanupBound) {
+      dialog.dataset.palomaCleanupBound = "true";
+      dialog.addEventListener("close", () => {
+        dialog.querySelector("[data-dialog-media]")?.classList.remove("dialog-media-paloma");
+      });
+    }
   };
 
   const applyEnhancements = () => {
