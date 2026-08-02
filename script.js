@@ -140,20 +140,23 @@ const caseStudies = {
     links: []
   },
   stepper: {
-    index: "UI STUDY 04 / COMPONENT",
-    kicker: "Multi-step payment pattern",
-    title: "Payment Stepper",
-    summary: "A compact flow that communicates where a user is, what is complete, and what happens next during payment.",
-    challenge: "Multi-step forms can make users uncertain about progress, especially when completed, current, upcoming, and blocked states look too similar.",
-    solution: "The component gives every state a distinct visual treatment and maintains a consistent relationship between progress, form content, and primary action.",
-    flow: ["Review order", "Enter details", "Choose payment", "Confirm information", "Complete payment"],
-    status: "Component and flow study showing multiple payment-step states and screen variations.",
+    index: "UI COLLECTION / MISCELLANEOUS",
+    kicker: "Seven focused interface exercises",
+    title: "UI/UX Design Challenge Vol. 1",
+    summary: "A mixed collection of compact interface studies exploring familiar patterns, interaction states, and different visual directions.",
+    challenge: "Short design exercises can easily become disconnected visual experiments. The challenge was to give each interface a clear purpose while keeping hierarchy, state changes, and primary actions understandable at a glance.",
+    solution: "Each exercise begins with one focused interaction problem, then develops the essential states before adding visual styling. The collection uses consistent spacing and readable structure while allowing every study to keep its own personality.",
+    flow: ["Read the brief", "Define the key states", "Sketch the interaction", "Build the interface", "Review the hierarchy", "Present the final study"],
+    status: "Self-initiated UI/UX collection covering payment progress, avatar groups, time selection, navigation and search, sign-in, accessibility controls, and presence indicators.",
     media: [
-      { type: "image", src: "Phone Ui/(Phone UI) Stepper Payment/Payment Flow (Cover).png", alt: "Payment Stepper cover" },
-      { type: "image", src: "Phone Ui/(Phone UI) Stepper Payment/Frame 3.png", alt: "Payment stepper details state" },
-      { type: "image", src: "Phone Ui/(Phone UI) Stepper Payment/Frame 6.png", alt: "Payment stepper completion state" }
+      { type: "image", src: "Component Design/Inside (thumbnail)/Payment Flow (Cover).png", alt: "Payment flow UI study" },
+      { type: "image", src: "Component Design/Inside (thumbnail)/3.png", alt: "UI/UX challenge study thumbnail 2" },
+      { type: "image", src: "Component Design/Inside (thumbnail)/4.png", alt: "UI/UX challenge study thumbnail 3" },
+      { type: "image", src: "Component Design/Inside (thumbnail)/5.png", alt: "UI/UX challenge study thumbnail 4" },
+      { type: "image", src: "Component Design/Inside (thumbnail)/5 (2).png", alt: "UI/UX challenge study thumbnail 5" },
+      { type: "image", src: "Component Design/Inside (thumbnail)/accessibility Setting (Mockups).png", alt: "Accessibility settings UI study" }
     ],
-    links: []
+    links: [{ label: "View Full Project on Behance ↗", href: "https://www.behance.net/gallery/253652935/UIUX-Design-Challenge-Vol-1", primary: true }]
   },
   nori: {
     index: "BRAND CASE 01",
@@ -282,6 +285,51 @@ filterButtons.forEach((button) => {
   });
 });
 
+function updateMiscellaneousCard() {
+  const trigger = document.querySelector('[data-case-study="stepper"]');
+  const card = trigger?.closest(".collection-card");
+  if (!card) return;
+
+  const cover = card.querySelector(".collection-media img");
+  if (cover) {
+    cover.src = "Component Design/Component - The Cover (1).png";
+    cover.alt = "UI/UX Design Challenge Vol. 1 cover";
+  }
+
+  const label = card.querySelector(".micro-label");
+  const title = card.querySelector("h3");
+  const description = card.querySelector(".collection-body > p:not(.micro-label)");
+
+  if (label) label.textContent = "UI/UX STUDIES / 7 EXERCISES";
+  if (title) title.textContent = "UI/UX Design Challenge Vol. 1";
+  if (description) description.textContent = "A mixed collection of focused interface exercises covering flows, states, accessibility, navigation, and reusable patterns.";
+  trigger.setAttribute("aria-label", "Open UI/UX Design Challenge Vol. 1 case study");
+
+  const style = document.createElement("style");
+  style.textContent = `
+    .collection-card:nth-child(5)::before { content: "Miscellaneous" !important; }
+    .dialog-media.dialog-media-six {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+      align-items: start;
+    }
+    .dialog-media.dialog-media-six img {
+      width: 100%;
+      height: auto;
+      max-height: none;
+      object-fit: contain;
+      background: var(--background);
+    }
+    @media (max-width: 720px) {
+      .dialog-media.dialog-media-six { grid-template-columns: 1fr; }
+    }
+  `;
+  document.head.appendChild(style);
+}
+
+updateMiscellaneousCard();
+
 const dialog = document.querySelector("[data-case-dialog]");
 const dialogClose = document.querySelector("[data-dialog-close]");
 const fields = {
@@ -330,13 +378,14 @@ function openCaseStudy(id) {
   setText(fields.solution, project.solution);
   setText(fields.status, project.status);
 
-  fields.flow.replaceChildren(...project.flow.map((step) => {
+  fields.flow?.replaceChildren(...project.flow.map((step) => {
     const item = document.createElement("li");
     item.textContent = step;
     return item;
   }));
 
-  fields.media.replaceChildren(...project.media.map(buildMedia));
+  fields.media?.classList.toggle("dialog-media-six", id === "stepper");
+  fields.media?.replaceChildren(...project.media.map(buildMedia));
 
   const actions = project.links.map((link) => {
     const anchor = document.createElement("a");
@@ -354,7 +403,7 @@ function openCaseStudy(id) {
   closeButton.textContent = "Close Case Study";
   closeButton.addEventListener("click", closeCaseStudy);
   actions.push(closeButton);
-  fields.actions.replaceChildren(...actions);
+  fields.actions?.replaceChildren(...actions);
 
   body.classList.add("dialog-open");
   dialog.showModal();
