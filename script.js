@@ -82,6 +82,82 @@
         object-fit: contain;
       }
 
+      .project-tags .desktop-only-tag {
+        background: var(--foreground);
+        color: var(--background);
+      }
+
+      @media (min-width: 901px) {
+        .work-section .section-heading {
+          margin-bottom: 2rem;
+        }
+
+        .work-section .filter-bar {
+          margin-bottom: 1.75rem;
+        }
+
+        .work-section .project-stack {
+          gap: clamp(2rem, 3vw, 3rem);
+        }
+
+        .work-section .project-row {
+          grid-template-columns: 2.25rem minmax(0, 1.18fr) minmax(18rem, .82fr);
+          gap: clamp(1rem, 2vw, 2rem);
+        }
+
+        .work-section .project-row-reverse {
+          grid-template-columns: 2.25rem minmax(18rem, .82fr) minmax(0, 1.18fr);
+        }
+
+        .work-section .project-image {
+          min-height: 0;
+          height: clamp(15rem, 22vw, 19rem);
+        }
+
+        .work-section .project-image img {
+          height: 100%;
+          min-height: 0;
+          object-fit: cover;
+        }
+
+        .work-section .project-copy h3 {
+          margin: .45rem 0 .65rem;
+          font-size: clamp(1.8rem, 2.5vw, 3rem);
+        }
+
+        .work-section .project-copy > p {
+          margin: 0;
+          font-size: .88rem;
+          line-height: 1.45;
+        }
+
+        .work-section .project-facts {
+          margin: .85rem 0 1rem;
+        }
+
+        .work-section .project-facts li {
+          padding: .45rem 0;
+        }
+
+        .work-section .button-small {
+          min-height: 2.25rem;
+          padding: .5rem .7rem;
+          font-size: .58rem;
+        }
+
+        .work-section .lab-card {
+          margin-top: 3rem;
+        }
+
+        .work-section .lab-image {
+          min-height: 19rem;
+        }
+
+        .work-section .lab-copy {
+          padding: clamp(1.25rem, 2.5vw, 2.5rem);
+        }
+      }
+
       @media (max-width: 760px) {
         .social-grid.social-grid-six {
           grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -99,6 +175,40 @@
       }
     `;
     document.head.appendChild(style);
+  };
+
+  const applySelectedWorkUpdate = () => {
+    const workSection = document.querySelector("#work");
+    if (!workSection) return;
+
+    workSection.querySelectorAll("img").forEach((image) => {
+      const source = image.getAttribute("src");
+      if (source?.startsWith("Functional (but some are broken) Website/")) {
+        image.setAttribute("src", source.replace("Functional (but some are broken) Website/", "Website/"));
+      }
+    });
+
+    const colorPickerTrigger = workSection.querySelector('[data-case-study="colorpicker"]');
+    const colorPickerCard = colorPickerTrigger?.closest("[data-project-card]");
+    if (!colorPickerCard) return;
+
+    const description = colorPickerCard.querySelector(".project-copy > p");
+    if (description) {
+      description.textContent = "A playful colour workspace combining direct colour selection with palette generation. It is currently available on desktop web only; mobile support, authentication, and several advanced tools are still in progress.";
+    }
+
+    const tags = colorPickerCard.querySelector(".project-tags");
+    if (tags && !tags.querySelector(".desktop-only-tag")) {
+      const desktopTag = document.createElement("span");
+      desktopTag.className = "desktop-only-tag";
+      desktopTag.textContent = "Desktop only";
+      tags.appendChild(desktopTag);
+    }
+
+    const status = colorPickerCard.querySelector(".project-facts li:last-child span");
+    if (status) {
+      status.textContent = "Core UI works; desktop web only; mobile and account tools in progress";
+    }
   };
 
   const applySocialGalleryUpdate = () => {
@@ -214,9 +324,15 @@
 
   const applyEnhancements = () => {
     addEnhancementStyles();
+    applySelectedWorkUpdate();
     applySocialGalleryUpdate();
     applyPalomaCardUpdate();
   };
+
+  // script.js is deferred, so the DOM is ready here. Apply critical visual fixes
+  // immediately so moved images do not remain broken while script-original.js loads.
+  addEnhancementStyles();
+  applySelectedWorkUpdate();
 
   const originalScript = document.createElement("script");
   originalScript.src = "script-original.js";
