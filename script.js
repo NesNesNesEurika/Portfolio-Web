@@ -1,6 +1,8 @@
 (() => {
   const PALOMA_BASE = "Paloma Grasia (Prettygirl Brand)";
   const PALOMA_BEHANCE = "https://www.behance.net/gallery/253659707/Pretty-Girl-Social-Media-Campaign-(Paloma-Grazia)";
+  const ROKOTO_BEHANCE = "https://www.behance.net/gallery/253814007/ROKOTO-Hot-Sauce-Landing-Page";
+  const ENTERPRISE_BEHANCE = "https://www.behance.net/gallery/253836267/Enterprise-Website-Design-Collection";
   const PALOMA_MEDIA = [
     { type: "image", src: `${PALOMA_BASE}/Thumbnail/1080X1080/6.png`, alt: "Paloma Grazia square social media design 1" },
     { type: "image", src: `${PALOMA_BASE}/Thumbnail/1080X1080/B.png`, alt: "Paloma Grazia square social media design 2" },
@@ -204,6 +206,57 @@
     document.head.appendChild(style);
   };
 
+  const addWebCollectionStyles = () => {
+    if (document.getElementById("web-collection-separation")) return;
+
+    const style = document.createElement("style");
+    style.id = "web-collection-separation";
+    style.textContent = `
+      .collection-card:nth-child(4) {
+        grid-column: 2;
+        grid-row: 1;
+      }
+
+      .collection-card:nth-child(5) {
+        grid-column: 2;
+        grid-row: 2;
+      }
+
+      .collection-card:nth-child(6) {
+        grid-column: 3;
+        grid-row: 1;
+      }
+
+      .collection-card:nth-child(5)::before {
+        content: none !important;
+      }
+
+      .collection-card:nth-child(6)::before {
+        content: "Miscellaneous" !important;
+        position: absolute;
+        left: 0;
+        top: -3.45rem;
+        color: var(--background);
+        font-size: clamp(1.4rem, 2.3vw, 2.4rem);
+        line-height: 1;
+        font-weight: 500;
+        letter-spacing: -.035em;
+        white-space: nowrap;
+      }
+
+      @media (max-width: 1000px) {
+        .collection-card:nth-child(5) {
+          margin-top: 0;
+        }
+
+        .collection-card:nth-child(6) {
+          margin-top: 4.25rem;
+        }
+      }
+    `;
+    document.head.appendChild(style);
+  };
+
   const applySelectedWorkUpdate = () => {
     const workSection = document.querySelector("#work");
     if (!workSection) return;
@@ -236,6 +289,84 @@
     if (status) {
       status.textContent = "Core UI works; desktop web only; mobile and account tools in progress";
     }
+  };
+
+  const createCollectionLink = (href, label) => {
+    const link = document.createElement("a");
+    link.className = "text-link";
+    link.href = href;
+    link.target = "_blank";
+    link.rel = "noreferrer";
+    link.setAttribute("aria-label", label);
+    return link;
+  };
+
+  const applyWebCollectionUpdate = () => {
+    const grid = document.querySelector(".collection-grid");
+    const webTrigger = grid?.querySelector('[data-case-study="webui"]');
+    const enterpriseCard = webTrigger?.closest(".collection-card");
+    const miscellaneousCard = grid?.querySelector('[data-case-study="stepper"]')?.closest(".collection-card");
+
+    if (!grid || !enterpriseCard || !miscellaneousCard) return;
+
+    const enterpriseMedia = enterpriseCard.querySelector(".collection-media");
+    if (enterpriseMedia) {
+      enterpriseMedia.classList.remove("split-media");
+      const image = document.createElement("img");
+      image.src = "Web UI/03 - Enerlov Enterprise Landing Page/enerlov (1) (Mockups).png";
+      image.alt = "Enterprise website design collection mockup";
+      image.loading = "lazy";
+      enterpriseMedia.replaceChildren(image);
+    }
+
+    const enterpriseLabel = enterpriseCard.querySelector(".micro-label");
+    const enterpriseTitle = enterpriseCard.querySelector("h3");
+    const enterpriseDescription = enterpriseCard.querySelector(".collection-body > p:not(.micro-label)");
+
+    if (enterpriseLabel) enterpriseLabel.textContent = "ENTERPRISE WEB UI / COLLECTION";
+    if (enterpriseTitle) enterpriseTitle.textContent = "Enterprise Website Design Collection";
+    if (enterpriseDescription) {
+      enterpriseDescription.textContent = "A collection of structured landing-page studies focused on clarity, trust, accessibility, and communicating complex services without overwhelming the user.";
+    }
+
+    const enterpriseLink = createCollectionLink(ENTERPRISE_BEHANCE, "Open Enterprise Website Design Collection on Behance");
+    webTrigger.replaceWith(enterpriseLink);
+    enterpriseCard.classList.add("collection-link-card");
+
+    if (!grid.querySelector('[data-web-project="rokoto"]')) {
+      const rokotoCard = document.createElement("article");
+      rokotoCard.className = "collection-card reveal is-visible collection-link-card";
+      rokotoCard.dataset.webProject = "rokoto";
+
+      const rokotoMedia = document.createElement("div");
+      rokotoMedia.className = "collection-media";
+      const rokotoImage = document.createElement("img");
+      rokotoImage.src = "Web UI/04 - ROKOTO Neon Block Landing Page/Rokoto (1) (Mockups).png";
+      rokotoImage.alt = "ROKOTO hot sauce landing page mockup";
+      rokotoImage.loading = "lazy";
+      rokotoMedia.appendChild(rokotoImage);
+
+      const rokotoBody = document.createElement("div");
+      rokotoBody.className = "collection-body";
+
+      const rokotoLabel = document.createElement("p");
+      rokotoLabel.className = "micro-label";
+      rokotoLabel.textContent = "E-COMMERCE LANDING PAGE / CONCEPT";
+
+      const rokotoTitle = document.createElement("h3");
+      rokotoTitle.textContent = "ROKOTO! Hot Sauce Landing Page";
+
+      const rokotoDescription = document.createElement("p");
+      rokotoDescription.textContent = "A bold product landing page that uses oversized typography, high-contrast sections, and energetic visuals to turn a simple hot-sauce concept into a memorable digital experience.";
+
+      const rokotoLink = createCollectionLink(ROKOTO_BEHANCE, "Open ROKOTO Hot Sauce Landing Page on Behance");
+
+      rokotoBody.append(rokotoLabel, rokotoTitle, rokotoDescription, rokotoLink);
+      rokotoCard.append(rokotoMedia, rokotoBody);
+      grid.insertBefore(rokotoCard, miscellaneousCard);
+    }
+
+    addWebCollectionStyles();
   };
 
   const applySocialGalleryUpdate = () => {
@@ -352,6 +483,7 @@
   const applyEnhancements = () => {
     addEnhancementStyles();
     applySelectedWorkUpdate();
+    applyWebCollectionUpdate();
     applySocialGalleryUpdate();
     applyPalomaCardUpdate();
   };
