@@ -408,6 +408,52 @@
     return button;
   };
 
+  const ensureWebCollectionStyles = () => {
+    if (document.getElementById("web-collection-separation")) return;
+
+    const style = document.createElement("style");
+    style.id = "web-collection-separation";
+    style.textContent = `
+      .collection-card:nth-child(4) {
+        grid-column: 2;
+        grid-row: 1;
+      }
+
+      .collection-card:nth-child(5) {
+        grid-column: 2;
+        grid-row: 2;
+      }
+
+      .collection-card:nth-child(6) {
+        grid-column: 3;
+        grid-row: 1;
+      }
+
+      .collection-card:nth-child(5)::before {
+        content: none !important;
+      }
+
+      .collection-card:nth-child(6)::before {
+        content: "Miscellaneous" !important;
+        position: absolute;
+        left: 0;
+        top: -3.45rem;
+        color: var(--background);
+        font-size: clamp(1.4rem, 2.3vw, 2.4rem);
+        line-height: 1;
+        font-weight: 500;
+        letter-spacing: -.035em;
+        white-space: nowrap;
+      }
+
+      @media (max-width: 1000px) {
+        .collection-card:nth-child(5) { margin-top: 0; }
+        .collection-card:nth-child(6) { margin-top: 4.25rem; }
+      }
+    `;
+    document.head.appendChild(style);
+  };
+
   const applyWebCollectionUpdate = () => {
     const grid = document.querySelector(".collection-grid");
     const webTrigger = grid?.querySelector('[data-case-study="webui"]');
@@ -415,6 +461,8 @@
     const miscellaneousCard = grid?.querySelector('[data-case-study="stepper"]')?.closest(".collection-card");
 
     if (!grid || !enterpriseCard || !miscellaneousCard) return;
+
+    ensureWebCollectionStyles();
 
     const enterpriseMedia = enterpriseCard.querySelector(".collection-media");
     if (enterpriseMedia) {
