@@ -146,15 +146,42 @@
         }
 
         .work-section .lab-card {
+          grid-template-columns: minmax(0, 1.18fr) minmax(18rem, .82fr);
+          height: clamp(15rem, 22vw, 19rem);
+          min-height: 0;
           margin-top: 3rem;
         }
 
         .work-section .lab-image {
-          min-height: 19rem;
+          height: 100%;
+          min-height: 0;
+        }
+
+        .work-section .lab-image img {
+          width: 100%;
+          height: 100%;
+          min-height: 0;
+          object-fit: cover;
         }
 
         .work-section .lab-copy {
-          padding: clamp(1.25rem, 2.5vw, 2.5rem);
+          align-self: stretch;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          min-height: 0;
+          padding: clamp(1.1rem, 2vw, 2rem);
+        }
+
+        .work-section .lab-copy h3 {
+          margin: .45rem 0 .65rem;
+          font-size: clamp(1.8rem, 2.5vw, 3rem);
+        }
+
+        .work-section .lab-copy > p:not(.micro-label) {
+          margin: 0 0 1rem;
+          font-size: .88rem;
+          line-height: 1.45;
         }
       }
 
