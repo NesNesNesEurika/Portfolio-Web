@@ -31,8 +31,6 @@
       ],
       status: "Self-initiated web UI collection covering Accessibility Settings, Northfield Testimonials and Customer Stories, and the Enerlov Enterprise Landing Page. The scope focuses on information hierarchy, visual direction, responsive composition, and presentation mockups.",
       media: [
-        { type: "image", src: "Web UI/01 - Accessibility Settings/accessibility Setting (Mockups).png", alt: "Accessibility settings web interface study" },
-        { type: "image", src: "Web UI/02 - Daily Challenge Testimonials & Customer Stories/Northfield (Mockups).png", alt: "Northfield testimonials and customer stories interface study" },
         { type: "image", src: "Web UI/03 - Enerlov Enterprise Landing Page/Enerlov (2) (Mockups).png", alt: "Enerlov enterprise landing page interface study" }
       ],
       link: ENTERPRISE_BEHANCE,
@@ -130,7 +128,7 @@
 
       .dialog-media.dialog-media-website {
         display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        grid-template-columns: 1fr;
         gap: 1rem;
         align-items: start;
       }
@@ -164,10 +162,14 @@
         grid-row: 1;
       }
 
-      .collection-card:nth-child(5)::before { content: none !important; }
+      .collection-card:nth-child(5)::before {
+        content: none !important;
+        display: none !important;
+      }
 
       .collection-card:nth-child(6)::before {
         content: "Miscellaneous" !important;
+        display: block !important;
         position: absolute;
         left: 0;
         top: -3.45rem;
@@ -431,10 +433,12 @@
 
       .collection-card:nth-child(5)::before {
         content: none !important;
+        display: none !important;
       }
 
       .collection-card:nth-child(6)::before {
         content: "Miscellaneous" !important;
+        display: block !important;
         position: absolute;
         left: 0;
         top: -3.45rem;
