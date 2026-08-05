@@ -3,6 +3,7 @@
   const PALOMA_BEHANCE = "https://www.behance.net/gallery/253659707/Pretty-Girl-Social-Media-Campaign-(Paloma-Grazia)";
   const ROKOTO_BEHANCE = "https://www.behance.net/gallery/253814007/ROKOTO-Hot-Sauce-Landing-Page";
   const ENTERPRISE_BEHANCE = "https://www.behance.net/gallery/253836267/Enterprise-Website-Design-Collection";
+
   const PALOMA_MEDIA = [
     { type: "image", src: `${PALOMA_BASE}/Thumbnail/1080X1080/6.png`, alt: "Paloma Grazia square social media design 1" },
     { type: "image", src: `${PALOMA_BASE}/Thumbnail/1080X1080/B.png`, alt: "Paloma Grazia square social media design 2" },
@@ -12,7 +13,57 @@
     { type: "video", src: `${PALOMA_BASE}/Thumbnail/1080x1920/1 (Okay).mp4`, alt: "Paloma Grazia vertical short-form video" }
   ];
 
-  const addEnhancementStyles = () => {
+  const WEBSITE_CASE_STUDIES = {
+    enterprise: {
+      index: "UI COLLECTION / WEBSITE",
+      kicker: "Three structured interface studies",
+      title: "Enterprise Website Design Collection",
+      summary: "A collection of web interface studies exploring accessibility controls, customer stories, and an enterprise landing page.",
+      challenge: "The three briefs contain very different kinds of information. Accessibility settings need instantly recognisable states, testimonials need believable social proof, and an enterprise landing page needs to explain a complex service without becoming visually overwhelming.",
+      solution: "Each study uses a clear content hierarchy and a layout suited to its purpose. Controls are grouped around readable states, customer stories use structured cards and supporting context, and the Enerlov page breaks technical information into focused sections with consistent navigation and calls to action.",
+      flow: [
+        "Review the design brief",
+        "Define content priority",
+        "Establish the page grid",
+        "Design the key sections",
+        "Check responsive hierarchy",
+        "Prepare the final mockups"
+      ],
+      status: "Self-initiated web UI collection covering Accessibility Settings, Northfield Testimonials and Customer Stories, and the Enerlov Enterprise Landing Page. The scope focuses on information hierarchy, visual direction, responsive composition, and presentation mockups.",
+      media: [
+        { type: "image", src: "Web UI/01 - Accessibility Settings/accessibility Setting (Mockups).png", alt: "Accessibility settings web interface study" },
+        { type: "image", src: "Web UI/02 - Daily Challenge Testimonials & Customer Stories/Northfield (Mockups).png", alt: "Northfield testimonials and customer stories interface study" },
+        { type: "image", src: "Web UI/03 - Enerlov Enterprise Landing Page/Enerlov (2) (Mockups).png", alt: "Enerlov enterprise landing page interface study" }
+      ],
+      link: ENTERPRISE_BEHANCE,
+      linkLabel: "View Full Collection on Behance ↗"
+    },
+    rokoto: {
+      index: "UI STUDY / WEBSITE",
+      kicker: "Expressive product landing page",
+      title: "ROKOTO! Hot Sauce Landing Page",
+      summary: "A bold hot-sauce landing page that combines energetic art direction with a clear product journey.",
+      challenge: "The visual identity needed to feel loud, playful, and memorable without making the product information difficult to follow. The page still had to guide users from the first brand impression toward flavour choices, product details, and purchase-focused actions.",
+      solution: "The layout uses oversized typography, neon colour blocks, product imagery, and strong section changes to create energy. Information is introduced in a controlled sequence, allowing each flavour, product message, and call to action to remain readable despite the expressive visual style.",
+      flow: [
+        "Define the product attitude",
+        "Build the hero message",
+        "Introduce flavour variants",
+        "Organise product details",
+        "Add purchase-focused actions",
+        "Create the final mockups"
+      ],
+      status: "Self-initiated landing-page concept for a fictional hot-sauce product. The scope includes visual direction, content hierarchy, product storytelling, e-commerce calls to action, desktop UI, and presentation mockups.",
+      media: [
+        { type: "image", src: "Web UI/04 - ROKOTO Neon Block Landing Page/Rokoto (1) (Mockups).png", alt: "ROKOTO hot sauce landing page cover mockup" },
+        { type: "image", src: "Web UI/04 - ROKOTO Neon Block Landing Page/Rokoto (2) (Mockups).png", alt: "ROKOTO hot sauce landing page interface mockup" }
+      ],
+      link: ROKOTO_BEHANCE,
+      linkLabel: "View Full Project on Behance ↗"
+    }
+  };
+
+  const addStyles = () => {
     if (document.getElementById("portfolio-gallery-enhancements")) return;
 
     const style = document.createElement("style");
@@ -39,13 +90,8 @@
         object-fit: cover;
       }
 
-      .social-gallery-actions {
-        margin-top: 2rem;
-      }
-
-      .paloma-main-cover {
-        min-height: 0;
-      }
+      .social-gallery-actions { margin-top: 2rem; }
+      .paloma-main-cover { min-height: 0; }
 
       .paloma-main-cover img {
         width: 100%;
@@ -54,9 +100,7 @@
         object-fit: contain;
       }
 
-      .paloma-card-actions {
-        margin-top: 1.5rem;
-      }
+      .paloma-card-actions { margin-top: 1.5rem; }
 
       .dialog-media.dialog-media-paloma {
         display: grid;
@@ -84,23 +128,61 @@
         object-fit: contain;
       }
 
+      .dialog-media.dialog-media-website {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1rem;
+        align-items: start;
+      }
+
+      .dialog-media-website img {
+        width: 100%;
+        height: auto;
+        min-height: 0 !important;
+        max-height: none;
+        object-fit: contain;
+        background: var(--muted);
+      }
+
       .project-tags .desktop-only-tag {
         background: var(--foreground);
         color: var(--background);
       }
 
+      .collection-card:nth-child(4) {
+        grid-column: 2;
+        grid-row: 1;
+      }
+
+      .collection-card:nth-child(5) {
+        grid-column: 2;
+        grid-row: 2;
+      }
+
+      .collection-card:nth-child(6) {
+        grid-column: 3;
+        grid-row: 1;
+      }
+
+      .collection-card:nth-child(5)::before { content: none !important; }
+
+      .collection-card:nth-child(6)::before {
+        content: "Miscellaneous" !important;
+        position: absolute;
+        left: 0;
+        top: -3.45rem;
+        color: var(--background);
+        font-size: clamp(1.4rem, 2.3vw, 2.4rem);
+        line-height: 1;
+        font-weight: 500;
+        letter-spacing: -.035em;
+        white-space: nowrap;
+      }
+
       @media (min-width: 901px) {
-        .work-section .section-heading {
-          margin-bottom: 2rem;
-        }
-
-        .work-section .filter-bar {
-          margin-bottom: 1.75rem;
-        }
-
-        .work-section .project-stack {
-          gap: clamp(2rem, 3vw, 3rem);
-        }
+        .work-section .section-heading { margin-bottom: 2rem; }
+        .work-section .filter-bar { margin-bottom: 1.75rem; }
+        .work-section .project-stack { gap: clamp(2rem, 3vw, 3rem); }
 
         .work-section .project-row {
           grid-template-columns: 2.25rem minmax(0, 1.18fr) minmax(18rem, .82fr);
@@ -133,13 +215,8 @@
           line-height: 1.45;
         }
 
-        .work-section .project-facts {
-          margin: .85rem 0 1rem;
-        }
-
-        .work-section .project-facts li {
-          padding: .45rem 0;
-        }
+        .work-section .project-facts { margin: .85rem 0 1rem; }
+        .work-section .project-facts li { padding: .45rem 0; }
 
         .work-section .button-small {
           min-height: 2.25rem;
@@ -187,71 +264,22 @@
         }
       }
 
+      @media (max-width: 1000px) {
+        .collection-card:nth-child(5) { margin-top: 0; }
+        .collection-card:nth-child(6) { margin-top: 4.25rem; }
+      }
+
       @media (max-width: 760px) {
         .social-grid.social-grid-six {
           grid-template-columns: repeat(2, minmax(0, 1fr));
         }
 
-        .dialog-media.dialog-media-paloma {
-          gap: .55rem;
-        }
+        .dialog-media.dialog-media-paloma { gap: .55rem; }
+        .dialog-media.dialog-media-website { grid-template-columns: 1fr; }
       }
 
       @media (max-width: 460px) {
-        .social-grid.social-grid-six {
-          grid-template-columns: 1fr;
-        }
-      }
-    `;
-    document.head.appendChild(style);
-  };
-
-  const addWebCollectionStyles = () => {
-    if (document.getElementById("web-collection-separation")) return;
-
-    const style = document.createElement("style");
-    style.id = "web-collection-separation";
-    style.textContent = `
-      .collection-card:nth-child(4) {
-        grid-column: 2;
-        grid-row: 1;
-      }
-
-      .collection-card:nth-child(5) {
-        grid-column: 2;
-        grid-row: 2;
-      }
-
-      .collection-card:nth-child(6) {
-        grid-column: 3;
-        grid-row: 1;
-      }
-
-      .collection-card:nth-child(5)::before {
-        content: none !important;
-      }
-
-      .collection-card:nth-child(6)::before {
-        content: "Miscellaneous" !important;
-        position: absolute;
-        left: 0;
-        top: -3.45rem;
-        color: var(--background);
-        font-size: clamp(1.4rem, 2.3vw, 2.4rem);
-        line-height: 1;
-        font-weight: 500;
-        letter-spacing: -.035em;
-        white-space: nowrap;
-      }
-
-      @media (max-width: 1000px) {
-        .collection-card:nth-child(5) {
-          margin-top: 0;
-        }
-
-        .collection-card:nth-child(6) {
-          margin-top: 4.25rem;
-        }
+        .social-grid.social-grid-six { grid-template-columns: 1fr; }
       }
     `;
     document.head.appendChild(style);
@@ -291,14 +319,93 @@
     }
   };
 
-  const createCollectionLink = (href, label) => {
-    const link = document.createElement("a");
-    link.className = "text-link";
-    link.href = href;
-    link.target = "_blank";
-    link.rel = "noreferrer";
-    link.setAttribute("aria-label", label);
-    return link;
+  const createMediaElement = (item) => {
+    if (item.type === "video") {
+      const video = document.createElement("video");
+      video.src = item.src;
+      video.controls = true;
+      video.preload = "metadata";
+      video.playsInline = true;
+      video.setAttribute("aria-label", item.alt);
+      return video;
+    }
+
+    const image = document.createElement("img");
+    image.src = item.src;
+    image.alt = item.alt;
+    image.loading = "lazy";
+    return image;
+  };
+
+  const closeDialog = () => {
+    const dialog = document.querySelector("[data-case-dialog]");
+    if (!dialog?.open) return;
+    dialog.querySelectorAll("video").forEach((video) => video.pause());
+    dialog.close();
+    document.body.classList.remove("dialog-open");
+  };
+
+  const openWebsiteCaseStudy = (id) => {
+    const project = WEBSITE_CASE_STUDIES[id];
+    const dialog = document.querySelector("[data-case-dialog]");
+    if (!project || !dialog) return;
+
+    const setText = (selector, value) => {
+      const element = dialog.querySelector(selector);
+      if (element) element.textContent = value;
+    };
+
+    setText("[data-dialog-index]", project.index);
+    setText("[data-dialog-kicker]", project.kicker);
+    setText("[data-dialog-title]", project.title);
+    setText("[data-dialog-summary]", project.summary);
+    setText("[data-dialog-challenge]", project.challenge);
+    setText("[data-dialog-solution]", project.solution);
+    setText("[data-dialog-status]", project.status);
+
+    const flow = dialog.querySelector("[data-dialog-flow]");
+    flow?.replaceChildren(...project.flow.map((step) => {
+      const item = document.createElement("li");
+      item.textContent = step;
+      return item;
+    }));
+
+    const media = dialog.querySelector("[data-dialog-media]");
+    media?.classList.remove("dialog-media-six", "dialog-media-paloma");
+    media?.classList.add("dialog-media-website");
+    media?.replaceChildren(...project.media.map(createMediaElement));
+
+    const actions = dialog.querySelector("[data-dialog-actions]");
+    if (actions) {
+      const behanceLink = document.createElement("a");
+      behanceLink.className = "button button-small button-primary";
+      behanceLink.href = project.link;
+      behanceLink.target = "_blank";
+      behanceLink.rel = "noreferrer";
+      behanceLink.textContent = project.linkLabel;
+
+      const closeButton = document.createElement("button");
+      closeButton.type = "button";
+      closeButton.className = "button button-small button-outline";
+      closeButton.textContent = "Close Case Study";
+      closeButton.addEventListener("click", closeDialog);
+
+      actions.replaceChildren(behanceLink, closeButton);
+    }
+
+    document.body.classList.add("dialog-open");
+    if (!dialog.open) dialog.showModal();
+    dialog.scrollTop = 0;
+  };
+
+  const createCaseStudyButton = (id, label) => {
+    const button = document.createElement("button");
+    button.className = "text-link";
+    button.type = "button";
+    button.dataset.websiteCaseStudy = id;
+    button.setAttribute("aria-label", label);
+    button.addEventListener("click", () => openWebsiteCaseStudy(id));
+    return button;
   };
 
   const applyWebCollectionUpdate = () => {
@@ -323,23 +430,24 @@
     const enterpriseTitle = enterpriseCard.querySelector("h3");
     const enterpriseDescription = enterpriseCard.querySelector(".collection-body > p:not(.micro-label)");
 
-    if (enterpriseLabel) enterpriseLabel.textContent = "ENTERPRISE WEB UI / COLLECTION";
+    if (enterpriseLabel) enterpriseLabel.textContent = "ENTERPRISE WEB UI / 3 STUDIES";
     if (enterpriseTitle) enterpriseTitle.textContent = "Enterprise Website Design Collection";
     if (enterpriseDescription) {
-      enterpriseDescription.textContent = "A collection of structured landing-page studies focused on clarity, trust, accessibility, and communicating complex services without overwhelming the user.";
+      enterpriseDescription.textContent = "Three structured interface studies exploring accessibility controls, customer stories, and enterprise communication.";
     }
 
-    const enterpriseLink = createCollectionLink(ENTERPRISE_BEHANCE, "Open Enterprise Website Design Collection on Behance");
-    webTrigger.replaceWith(enterpriseLink);
-    enterpriseCard.classList.add("collection-link-card");
+    const enterpriseButton = createCaseStudyButton("enterprise", "Open Enterprise Website Design Collection case study");
+    webTrigger.replaceWith(enterpriseButton);
+    enterpriseCard.classList.add("collection-case-card");
 
     if (!grid.querySelector('[data-web-project="rokoto"]')) {
       const rokotoCard = document.createElement("article");
-      rokotoCard.className = "collection-card reveal is-visible collection-link-card";
+      rokotoCard.className = "collection-card reveal is-visible collection-case-card";
       rokotoCard.dataset.webProject = "rokoto";
 
       const rokotoMedia = document.createElement("div");
       rokotoMedia.className = "collection-media";
+
       const rokotoImage = document.createElement("img");
       rokotoImage.src = "Web UI/04 - ROKOTO Neon Block Landing Page/Rokoto (1) (Mockups).png";
       rokotoImage.alt = "ROKOTO hot sauce landing page mockup";
@@ -357,16 +465,22 @@
       rokotoTitle.textContent = "ROKOTO! Hot Sauce Landing Page";
 
       const rokotoDescription = document.createElement("p");
-      rokotoDescription.textContent = "A bold product landing page that uses oversized typography, high-contrast sections, and energetic visuals to turn a simple hot-sauce concept into a memorable digital experience.";
+      rokotoDescription.textContent = "An expressive product page balancing neon energy, flavour storytelling, and a clear purchase journey.";
 
-      const rokotoLink = createCollectionLink(ROKOTO_BEHANCE, "Open ROKOTO Hot Sauce Landing Page on Behance");
+      const rokotoButton = createCaseStudyButton("rokoto", "Open ROKOTO Hot Sauce Landing Page case study");
 
-      rokotoBody.append(rokotoLabel, rokotoTitle, rokotoDescription, rokotoLink);
+      rokotoBody.append(rokotoLabel, rokotoTitle, rokotoDescription, rokotoButton);
       rokotoCard.append(rokotoMedia, rokotoBody);
       grid.insertBefore(rokotoCard, miscellaneousCard);
     }
 
-    addWebCollectionStyles();
+    const dialog = document.querySelector("[data-case-dialog]");
+    if (dialog && !dialog.dataset.websiteCleanupBound) {
+      dialog.dataset.websiteCleanupBound = "true";
+      dialog.addEventListener("close", () => {
+        dialog.querySelector("[data-dialog-media]")?.classList.remove("dialog-media-website");
+      });
+    }
   };
 
   const applySocialGalleryUpdate = () => {
@@ -395,33 +509,15 @@
     }
   };
 
-  const createPalomaMediaElement = (item) => {
-    if (item.type === "video") {
-      const video = document.createElement("video");
-      video.src = item.src;
-      video.controls = true;
-      video.preload = "metadata";
-      video.playsInline = true;
-      video.setAttribute("aria-label", item.alt);
-      return video;
-    }
-
-    const image = document.createElement("img");
-    image.src = item.src;
-    image.alt = item.alt;
-    image.loading = "lazy";
-    return image;
-  };
-
   const applyPalomaDialogUpdate = () => {
     const dialog = document.querySelector("[data-case-dialog]");
     const title = dialog?.querySelector("[data-dialog-title]");
     if (!dialog?.open || title?.textContent.trim() !== "Paloma Grazia") return;
 
     const media = dialog.querySelector("[data-dialog-media]");
-    media?.classList.remove("dialog-media-six");
+    media?.classList.remove("dialog-media-six", "dialog-media-website");
     media?.classList.add("dialog-media-paloma");
-    media?.replaceChildren(...PALOMA_MEDIA.map(createPalomaMediaElement));
+    media?.replaceChildren(...PALOMA_MEDIA.map(createMediaElement));
 
     const actions = dialog.querySelector("[data-dialog-actions]");
     if (actions && !actions.querySelector(".paloma-behance-dialog-link")) {
@@ -481,16 +577,14 @@
   };
 
   const applyEnhancements = () => {
-    addEnhancementStyles();
+    addStyles();
     applySelectedWorkUpdate();
     applyWebCollectionUpdate();
     applySocialGalleryUpdate();
     applyPalomaCardUpdate();
   };
 
-  // script.js is deferred, so the DOM is ready here. Apply critical visual fixes
-  // immediately so moved images do not remain broken while script-original.js loads.
-  addEnhancementStyles();
+  addStyles();
   applySelectedWorkUpdate();
 
   const originalScript = document.createElement("script");
