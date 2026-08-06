@@ -664,6 +664,13 @@
     const title = dialog?.querySelector("[data-dialog-title]");
     if (!dialog?.open || title?.textContent.trim() !== "Streak Habit Tracker") return;
 
+    const media = dialog.querySelector("[data-dialog-media]");
+    if (media?.firstElementChild) {
+      const phoneImage = media.firstElementChild;
+      media.classList.remove("dialog-media-six", "dialog-media-paloma", "dialog-media-website");
+      media.replaceChildren(phoneImage);
+    }
+
     const actions = dialog.querySelector("[data-dialog-actions]");
     if (actions && !actions.querySelector(".habit-behance-dialog-link")) {
       const link = document.createElement("a");
