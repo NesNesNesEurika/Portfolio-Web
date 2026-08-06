@@ -3,6 +3,7 @@
   const PALOMA_BEHANCE = "https://www.behance.net/gallery/253659707/Pretty-Girl-Social-Media-Campaign-(Paloma-Grazia)";
   const ROKOTO_BEHANCE = "https://www.behance.net/gallery/253814007/ROKOTO-Hot-Sauce-Landing-Page";
   const ENTERPRISE_BEHANCE = "https://www.behance.net/gallery/253836267/Enterprise-Website-Design-Collection";
+  const LUCIGO_BEHANCE = "https://www.behance.net/gallery/253652773/LuciGo-Saint-Lucia-Travel-App";
 
   const PALOMA_MEDIA = [
     { type: "image", src: `${PALOMA_BASE}/Thumbnail/1080X1080/6.png`, alt: "Paloma Grazia square social media design 1" },
@@ -628,12 +629,40 @@
     }
   };
 
+  const applyLuciGoDialogUpdate = () => {
+    const dialog = document.querySelector("[data-case-dialog]");
+    const title = dialog?.querySelector("[data-dialog-title]");
+    if (!dialog?.open || title?.textContent.trim() !== "LuciGo Experience Booking") return;
+
+    const actions = dialog.querySelector("[data-dialog-actions]");
+    if (actions && !actions.querySelector(".lucigo-behance-dialog-link")) {
+      const link = document.createElement("a");
+      link.className = "button button-small button-primary lucigo-behance-dialog-link";
+      link.href = LUCIGO_BEHANCE;
+      link.target = "_blank";
+      link.rel = "noreferrer";
+      link.textContent = "View Full Project on Behance ↗";
+      actions.insertBefore(link, actions.firstChild);
+    }
+  };
+
+  const applyLuciGoCardUpdate = () => {
+    const trigger = document.querySelector('[data-case-study="lucigo"]');
+    if (!trigger || trigger.dataset.lucigoBehanceBound) return;
+
+    trigger.dataset.lucigoBehanceBound = "true";
+    trigger.addEventListener("click", () => {
+      window.requestAnimationFrame(applyLuciGoDialogUpdate);
+    });
+  };
+
   const applyEnhancements = () => {
     addStyles();
     applySelectedWorkUpdate();
     applyWebCollectionUpdate();
     applySocialGalleryUpdate();
     applyPalomaCardUpdate();
+    applyLuciGoCardUpdate();
   };
 
   addStyles();
