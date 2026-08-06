@@ -5,6 +5,8 @@
   const ENTERPRISE_BEHANCE = "https://www.behance.net/gallery/253836267/Enterprise-Website-Design-Collection";
   const LUCIGO_BEHANCE = "https://www.behance.net/gallery/253652773/LuciGo-Saint-Lucia-Travel-App";
   const HABIT_BEHANCE = "https://www.behance.net/gallery/253836701/Habit-Tracker-App-(Daily-Challenge)";
+  const CASA_LUZ_BEHANCE = "https://www.behance.net/gallery/253652471/Casa-Luz-(Concept)-Hotel-Navigation-App";
+  const CASA_LUZ_COVER = "Phone Ui/(Phone UI) Camera Focused Hotel App/Camera Focused Hotel App (Mockup) (Cover).png";
 
   const PALOMA_MEDIA = [
     { type: "image", src: `${PALOMA_BASE}/Thumbnail/1080X1080/6.png`, alt: "Paloma Grazia square social media design 1" },
@@ -684,6 +686,44 @@
     });
   };
 
+  const applyCasaLuzDialogUpdate = () => {
+    const dialog = document.querySelector("[data-case-dialog]");
+    const title = dialog?.querySelector("[data-dialog-title]");
+    if (!dialog?.open || title?.textContent.trim() !== "Casa Luz") return;
+
+    const media = dialog.querySelector("[data-dialog-media]");
+    if (media) {
+      media.classList.remove("dialog-media-six", "dialog-media-paloma", "dialog-media-website");
+
+      const image = document.createElement("img");
+      image.src = CASA_LUZ_COVER;
+      image.alt = "Casa Luz pink hand-held phone mockup";
+      image.loading = "lazy";
+      media.replaceChildren(image);
+    }
+
+    const actions = dialog.querySelector("[data-dialog-actions]");
+    if (actions && !actions.querySelector(".casa-luz-behance-dialog-link")) {
+      const link = document.createElement("a");
+      link.className = "button button-small button-primary casa-luz-behance-dialog-link";
+      link.href = CASA_LUZ_BEHANCE;
+      link.target = "_blank";
+      link.rel = "noreferrer";
+      link.textContent = "View Full Project on Behance ↗";
+      actions.insertBefore(link, actions.firstChild);
+    }
+  };
+
+  const applyCasaLuzCardUpdate = () => {
+    const trigger = document.querySelector('[data-case-study="casaluz"]');
+    if (!trigger || trigger.dataset.casaLuzBehanceBound) return;
+
+    trigger.dataset.casaLuzBehanceBound = "true";
+    trigger.addEventListener("click", () => {
+      window.requestAnimationFrame(applyCasaLuzDialogUpdate);
+    });
+  };
+
   const applyEnhancements = () => {
     addStyles();
     applySelectedWorkUpdate();
@@ -692,6 +732,7 @@
     applyPalomaCardUpdate();
     applyLuciGoCardUpdate();
     applyHabitCardUpdate();
+    applyCasaLuzCardUpdate();
   };
 
   addStyles();
