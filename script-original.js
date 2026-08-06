@@ -168,11 +168,9 @@ const caseStudies = {
     flow: ["Define positioning", "Build logo variations", "Set colour and type", "Apply to packaging", "Extend to social and web"],
     status: "Brand concept covering identity, packaging, merchandise, business cards, social posts and stories, motion studies, and landing-page screens.",
     media: [
-      { type: "image", src: "Fun Brand Project/Nori Brand/Nori Brand Design.png", alt: "Nori brand identity overview" },
-      { type: "image", src: "Fun Brand Project/Nori Brand/Nori Package Design - 2.png", alt: "Nori package design" },
-      { type: "image", src: "Fun Brand Project/Nori Brand/Mockup Nori merch/3.png", alt: "Nori merchandise application" },
-      { type: "image", src: "Fun Brand Project/Nori Brand/Nori Landing Page/Home.png", alt: "Nori landing page home screen" },
-      { type: "video", src: "Fun Brand Project/Nori Brand/Matcha Video 1.mp4", alt: "Nori matcha motion study" }
+      { type: "image", src: "Fun Brand Project/Nori Brand/Instant Matcha Latte social media/1.png", alt: "Nori instant matcha latte social media design" },
+      { type: "image", src: "Fun Brand Project/Nori Brand/Nori Package Design - 1.png", alt: "Nori package design" },
+      { type: "image", src: "Fun Brand Project/Nori Brand/Mockup Nori merch/1.png", alt: "Nori merchandise mockup" }
     ],
     links: []
   },
