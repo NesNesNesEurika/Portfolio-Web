@@ -4,6 +4,7 @@
   const ROKOTO_BEHANCE = "https://www.behance.net/gallery/253814007/ROKOTO-Hot-Sauce-Landing-Page";
   const ENTERPRISE_BEHANCE = "https://www.behance.net/gallery/253836267/Enterprise-Website-Design-Collection";
   const LUCIGO_BEHANCE = "https://www.behance.net/gallery/253652773/LuciGo-Saint-Lucia-Travel-App";
+  const HABIT_BEHANCE = "https://www.behance.net/gallery/253836701/Habit-Tracker-App-(Daily-Challenge)";
 
   const PALOMA_MEDIA = [
     { type: "image", src: `${PALOMA_BASE}/Thumbnail/1080X1080/6.png`, alt: "Paloma Grazia square social media design 1" },
@@ -656,6 +657,33 @@
     });
   };
 
+  const applyHabitDialogUpdate = () => {
+    const dialog = document.querySelector("[data-case-dialog]");
+    const title = dialog?.querySelector("[data-dialog-title]");
+    if (!dialog?.open || title?.textContent.trim() !== "Streak Habit Tracker") return;
+
+    const actions = dialog.querySelector("[data-dialog-actions]");
+    if (actions && !actions.querySelector(".habit-behance-dialog-link")) {
+      const link = document.createElement("a");
+      link.className = "button button-small button-primary habit-behance-dialog-link";
+      link.href = HABIT_BEHANCE;
+      link.target = "_blank";
+      link.rel = "noreferrer";
+      link.textContent = "View Full Project on Behance ↗";
+      actions.insertBefore(link, actions.firstChild);
+    }
+  };
+
+  const applyHabitCardUpdate = () => {
+    const trigger = document.querySelector('[data-case-study="habit"]');
+    if (!trigger || trigger.dataset.habitBehanceBound) return;
+
+    trigger.dataset.habitBehanceBound = "true";
+    trigger.addEventListener("click", () => {
+      window.requestAnimationFrame(applyHabitDialogUpdate);
+    });
+  };
+
   const applyEnhancements = () => {
     addStyles();
     applySelectedWorkUpdate();
@@ -663,6 +691,7 @@
     applySocialGalleryUpdate();
     applyPalomaCardUpdate();
     applyLuciGoCardUpdate();
+    applyHabitCardUpdate();
   };
 
   addStyles();
