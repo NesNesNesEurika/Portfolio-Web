@@ -232,7 +232,7 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--ring); outline-
 .contact-section { padding-block: clamp(5rem, 10vw, 10rem) 2rem; background: var(--primary); color: var(--primary-foreground); border-top: var(--line); }
 .contact-inner { position: relative; }
 .contact-title { margin: 1.5rem 0 3rem; font-size: clamp(4rem, 11vw, 12rem); line-height: .77; letter-spacing: -.08em; text-transform: uppercase; }
-.contact-title span { color: var(--accent); -webkit-text-stroke: 2px var(--foreground); text-shadow: 5px 5px 0 var(--foreground); }
+.contact-title span { color: var(--accent); }
 .contact-actions .button-outline { background: transparent; color: var(--primary-foreground); border-color: currentColor; }
 .contact-actions .button-primary { background: var(--accent); color: var(--accent-foreground); }
 .contact-footer { margin-top: clamp(5rem, 12vw, 12rem); padding-top: 1rem; border-top: 1px solid currentColor; display: flex; justify-content: space-between; gap: 1rem; font-family: "Courier New", monospace; font-size: .7rem; }
