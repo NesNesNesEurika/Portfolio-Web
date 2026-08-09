@@ -416,15 +416,31 @@ function closeCaseStudy() {
 }
 
 document.querySelectorAll("[data-case-study]").forEach((button) => {
-  button.addEventListener("click", () => {
-    const id = button.dataset.caseStudy;
-    if ((id === "nori" || id === "paradiseto") && caseStudies[id].links[0]?.href) {
-      window.open(caseStudies[id].links[0].href, "_blank", "noopener,noreferrer");
-      return;
-    }
-    openCaseStudy(id);
-  });
+  button.addEventListener("click", () => openCaseStudy(button.dataset.caseStudy));
 });
+
+function addBrandBehanceAction(id, href) {
+  const trigger = document.querySelector(`[data-case-study="${id}"]`);
+  const card = trigger?.closest(".brand-feature");
+  if (!trigger || !card || card.querySelector(`[data-brand-behance="${id}"]`)) return;
+
+  const actionRow = document.createElement("div");
+  actionRow.className = "project-actions paloma-card-actions";
+  trigger.parentNode.insertBefore(actionRow, trigger);
+  actionRow.appendChild(trigger);
+
+  const behanceLink = document.createElement("a");
+  behanceLink.className = "button button-small button-primary";
+  behanceLink.href = href;
+  behanceLink.target = "_blank";
+  behanceLink.rel = "noreferrer";
+  behanceLink.dataset.brandBehance = id;
+  behanceLink.textContent = "View on Behance ↗";
+  actionRow.appendChild(behanceLink);
+}
+
+addBrandBehanceAction("nori", "https://www.behance.net/gallery/253838175/NORI-Matcha-Branding-Packaging-Social-Media-Design");
+addBrandBehanceAction("paradiseto", "https://www.behance.net/gallery/253840595/Paradise-Chocolate-Graphic-Design-Brand-Identity");
 
 dialogClose?.addEventListener("click", closeCaseStudy);
 dialog?.addEventListener("click", (event) => {
