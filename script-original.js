@@ -189,7 +189,7 @@ const caseStudies = {
       { type: "image", src: "Fun Brand Project/Paradiseto Chocolato/Paradiseto Chocolato (Feeds)/4.png", alt: "Paradiseto Chocolato social design" },
       { type: "video", src: "Fun Brand Project/Paradiseto Chocolato/Finish Motion Graphic.mp4", alt: "Paradiseto Chocolato motion graphic" }
     ],
-    links: []
+    links: [{ label: "View Full Project on Behance ↗", href: "https://www.behance.net/gallery/253840595/Paradise-Chocolate-Graphic-Design-Brand-Identity", primary: true }]
   },
   paloma: {
     index: "CAMPAIGN CASE 03",
@@ -418,8 +418,8 @@ function closeCaseStudy() {
 document.querySelectorAll("[data-case-study]").forEach((button) => {
   button.addEventListener("click", () => {
     const id = button.dataset.caseStudy;
-    if (id === "nori" && caseStudies.nori.links[0]?.href) {
-      window.open(caseStudies.nori.links[0].href, "_blank", "noopener,noreferrer");
+    if ((id === "nori" || id === "paradiseto") && caseStudies[id].links[0]?.href) {
+      window.open(caseStudies[id].links[0].href, "_blank", "noopener,noreferrer");
       return;
     }
     openCaseStudy(id);
