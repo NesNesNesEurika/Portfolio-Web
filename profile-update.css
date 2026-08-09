@@ -10,3 +10,36 @@
   -webkit-mask: url("Icon/arrow.svg") center / contain no-repeat;
   mask: url("Icon/arrow.svg") center / contain no-repeat;
 }
+
+/* Portfolio typography: readable sans-serif body copy, expressive subheadings, and the AE logo face. */
+:root {
+  --font-body: "Elms Sans", Arial, sans-serif;
+  --font-subheading: "Stack Sans Headline", "Elms Sans", Arial, sans-serif;
+  --font-logo: "Erica One", "Elms Sans", sans-serif;
+}
+
+body {
+  font-family: var(--font-body);
+}
+
+.wordmark-mark {
+  font-family: var(--font-logo);
+  font-size: .78rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1;
+  text-transform: none;
+}
+
+.section-heading h2,
+.project-copy h3,
+.lab-copy h3,
+.collection-body h3,
+.experience-copy h3,
+.brand-copy h3,
+.about-copy h2,
+.dialog-header h2,
+.dialog-grid h3 {
+  font-family: var(--font-subheading);
+  font-weight: 650;
+}
