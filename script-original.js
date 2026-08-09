@@ -172,7 +172,7 @@ const caseStudies = {
       { type: "image", src: "Fun Brand Project/Nori Brand/Nori Package Design - 1.png", alt: "Nori package design" },
       { type: "image", src: "Fun Brand Project/Nori Brand/Mockup Nori merch/1.png", alt: "Nori merchandise mockup" }
     ],
-    links: []
+    links: [{ label: "View Full Project on Behance ↗", href: "https://www.behance.net/gallery/253838175/NORI-Matcha-Branding-Packaging-Social-Media-Design", primary: true }]
   },
   paradiseto: {
     index: "BRAND CASE 02",
@@ -416,7 +416,14 @@ function closeCaseStudy() {
 }
 
 document.querySelectorAll("[data-case-study]").forEach((button) => {
-  button.addEventListener("click", () => openCaseStudy(button.dataset.caseStudy));
+  button.addEventListener("click", () => {
+    const id = button.dataset.caseStudy;
+    if (id === "nori" && caseStudies.nori.links[0]?.href) {
+      window.open(caseStudies.nori.links[0].href, "_blank", "noopener,noreferrer");
+      return;
+    }
+    openCaseStudy(id);
+  });
 });
 
 dialogClose?.addEventListener("click", closeCaseStudy);
