@@ -150,7 +150,7 @@
     card.dataset.status = "live";
     card.dataset.pcaProject = "";
     card.innerHTML = `
-      <div class="project-number">02</div>
+      <div class="project-number">01</div>
       <a class="project-image pca-project-image" href="${PCA_LIVE}" target="_blank" rel="noreferrer" aria-label="Open Playable Campaign Agent live prototype">
         <img src="${TRANSPARENT_PIXEL}" alt="Playable Campaign Agent displayed on a laptop in a campaign planning workspace" loading="lazy" data-pca-cover />
       </a>
@@ -168,7 +168,7 @@
         </div>
       </div>`;
 
-    lunaria.insertAdjacentElement("afterend", card);
+    lunaria.insertAdjacentElement("beforebegin", card);
     card.querySelector("[data-pca-case-study]")?.addEventListener("click", openPcaCaseStudy);
     hydratePcaCover(card);
 
